@@ -6,14 +6,15 @@ import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask_mongoengine import MongoEngine
 from flask_cors import CORS, cross_origin
+import config
 
 app = Flask(__name__)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-DB_URI = "mongodb+srv://wintala:frekvenssi@cluster0.ee5ur.mongodb.net/newshour?retryWrites=true&w=majority"
-app.config["MONGODB_HOST"] = DB_URI
+
+app.config["MONGODB_HOST"] = config.DB_URI
 db = MongoEngine(app)
 
 class Hour(db.Document):
