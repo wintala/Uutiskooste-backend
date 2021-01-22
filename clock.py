@@ -1,5 +1,5 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
-from main import Hour
+from app import Hour
 from datafetchers.fetch_all import fetch_all
 
 sched = BlockingScheduler()
