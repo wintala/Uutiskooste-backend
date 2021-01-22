@@ -1,9 +1,5 @@
 from flask import Flask, request, jsonify
-from datafetchers.fetch_all import fetch_all
 import datetime
-import time
-import atexit
-from apscheduler.schedulers.background import BackgroundScheduler
 from flask_mongoengine import MongoEngine
 from flask_cors import CORS, cross_origin
 import config
@@ -20,17 +16,6 @@ db = MongoEngine(app)
 class Hour(db.Document):
     time = db.DateTimeField(default=datetime.datetime.utcnow)
     data = db.DictField()
-
-def scrape_info_to_db():
-    print("SAVING")
-    Hour(data=fetch_all()).save()
-
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=scrape_info_to_db, trigger="interval", next_run_time=datetime.datetime.now(), hours=1)
-scheduler.start()
-
-atexit.register(lambda: scheduler.shutdown())
-
 
 @app.route("/api/current", methods=["GET"])
 @cross_origin()
