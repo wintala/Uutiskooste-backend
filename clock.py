@@ -4,7 +4,7 @@ from datafetchers.fetch_all import fetch_all
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', seconds=30)
+@sched.scheduled_job('interval', hours=1)
 def scrape_info_to_db():
     print("SAVING")
     Hour(data=fetch_all()).save()
