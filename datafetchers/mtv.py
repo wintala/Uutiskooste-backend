@@ -15,6 +15,8 @@ def mtv_uutiset():
     def filter_item(d):
         new_dict = {key: d["attributes"][key] for key in d["attributes"] if key in VALID_FIELDS}
 
+        new_dict["url"] = "https://" + new_dict["url"]
+
         try:
             new_dict["picture"] = new_dict["image"]
             del new_dict["image"]
