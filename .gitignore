@@ -1,2 +1,5 @@
 /.vscode
 _pycache_/
+Procfile
+Pipfile.lock
+config.py
